@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+lang="en_US"
+file=""
+
+while [ ! -z "$1" ]; do
+    [ "$1" == "-l" ] && lang="$2"
+    [ "$1" == "-f" ] && file="$2"
+    shift; shift
+done
+
+get_recording ()
+{
+    true
+}
+
+recording_loop ()
+{
+    while true; do
+        file="/tmp/stt.flac"
+        rec -q "$file" rate 16000 silence 1 0.1 0.1% & pid=$! # Depends on Sox.
+        
+    done
+}
+
+if [ -z "$file" ]; then
+    file="/tmp/stt.flac"
+    #rec /tmp/stt.flac rate 16000 silence -l 2 0.1 0.1% 1 0.5 0.1%  # Stop recording after 0.5 seconds silence.
+    rec -q "$file" rate 16000 silence 1 0.1 0.1% & pid=$! # Depends on Sox.
+    
+    echo -n "Press Enter When Finished Recording" 1>&2
+    read -t 14 i  # Google appears to return 500 error for audio's over 14 seconds.
+    kill -HUP $pid
+    wait $pid 2> /dev/null
+fi
+
+output=$(curl -X POST --header "Content-type: audio/x-flac; rate=16000;"  --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.77 Safari/535.7" --data-binary "@$file" "https://www.google.com/speech-api/v1/recognize?client=chromium&lang=$lang")
+
+#echo "$output"
+confidence=$(echo "$output" | sed 's/.*confidence":0.\(..\).*/\1/')
+text=$(echo "$output" | sed 's/.*utterance":"\([^"]*\).*/\1/')
+
+echo "Confidence: $confidence%" 1>&2
+echo "$text"

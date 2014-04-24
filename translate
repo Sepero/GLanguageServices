@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+lang="$1"
+shift
+words=$@
+wget -U "Mozilla/5.0" -qO - "http://translate.google.com/translate_a/t?client=t&sl=auto&tl=$lang&text=$words" | sed 's/\[\[\[\"//' | cut -d \" -f 1
