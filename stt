@@ -4,25 +4,11 @@
 lang="en_US"
 file=""
 
-while [ ! -z "$1" ]; do
+while [ "${1:-}" == "-" ]; do
     [ "$1" == "-l" ] && lang="$2"
     [ "$1" == "-f" ] && file="$2"
     shift; shift
 done
-
-get_recording ()
-{
-    true
-}
-
-recording_loop ()
-{
-    while true; do
-        file="/tmp/stt.flac"
-        rec -q "$file" rate 16000 silence 1 0.1 0.1% & pid=$! # Depends on Sox.
-        
-    done
-}
 
 if [ -z "$file" ]; then
     file="/tmp/stt.flac"
