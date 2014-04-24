@@ -2,5 +2,6 @@
 
 # http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 lang="en_US"
-[ ! -z "$2" ] && { lang="$1"; echo "Lang set $lang"; shift; }
-mplayer "http://translate.google.com/translate_tts?tl=$lang&q=$1"
+[ "$1" == "-l" ] && { lang="$2"; echo "Lang set $lang"; shift; shift; }
+words=$@
+mplayer "http://translate.google.com/translate_tts?tl=$lang&q=$words"
