@@ -14,7 +14,10 @@ Language codes
 http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 
-=Usage=
+Usage
+=====
+
+## stt
 
 stt [-l language] [-f file.flac]
 Records voice audio from the microphone, and outputs transcribed text. (requires sox)
@@ -27,6 +30,7 @@ May output error if it cannot recognize speech.
 Google voice recognition doesn't like audio files over 14 seconds.
 
 
+## tts
 
 tts [-l language] text to speak
 Takes text and plays it through the speakers as audio. (requires mplayer)
@@ -37,6 +41,7 @@ Known Bugs:
 None.
 
 
+## translate
 
 translate [-l languageinput] -o languageoutput text to translate
 Translates text from one language to another.
