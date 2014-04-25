@@ -14,7 +14,7 @@ Language codes
 http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 
-==Usage==
+=Usage=
 
 stt [-l language] [-f file.flac]
 Records voice audio from the microphone, and outputs transcribed text. (requires sox)
