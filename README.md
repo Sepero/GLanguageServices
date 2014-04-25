@@ -10,7 +10,7 @@ tts - Text to Speech (requires mplayer)
 translate - Language Translation (requires cUrl)  
 
 
-Language codes  
+For Language codes, see (column 639-1)  
 http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 
