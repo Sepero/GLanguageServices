@@ -1,12 +1,15 @@
 #!/bin/bash
 
+fake_browser="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.77 Safari/535.7"
+
 # http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 lang_in="auto"
-while [ "${1:-}" == "-" ]; do
+while [ "${1:0:1}" == "-" ]; do
     [ "$1" == "-l" ] && lang_in="$2"
     [ "$1" == "-o" ] && lang_out="$2"
     shift; shift
 done
 
 words=$@
-wget -U "Mozilla/5.0" -qO - "http://translate.google.com/translate_a/t?client=t&sl=$lang_in&tl=$lang_out&text=$words" | sed 's/\[\[\[\"//' | cut -d \" -f 1
+curl -s -X POST --user-agent "$fake_browser" --data-urlencode "sl=$lang_in" --data-urlencode "tl=$lang_out" --data-urlencode "client=t" --data-urlencode "text=$words" "http://translate.google.com/translate_a/t" | sed 's/\[\[\[\"//' | cut -d \" -f 1
+#wget -U "$fake_browser" -qO - "http://translate.google.com/translate_a/t?client=t&sl=$lang_in&tl=$lang_out&text=$words" | sed 's/\[\[\[\"//' | cut -d \" -f 1

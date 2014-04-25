@@ -5,9 +5,9 @@ Bash scripts for taking advantage of the following Google services on Linux
 Speech to Text, Text to Speech, and Language Translation
 
 The executable script names
-stt - Speech to Text (requires sox is installed)
+stt - Speech to Text (requires sox and cUrl are installed)
 tts - Text to Speech (requires mplayer)
-translate - Language Translation
+translate - Language Translation (requires cUrl)
 
 
 Language codes
