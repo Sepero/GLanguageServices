@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fake_browser="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1944.0 Safari/537.36"
+fake_ua="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1944.0 Safari/537.36"
 
 # http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 lang="en_US"
@@ -23,7 +23,7 @@ if [ -z "$file" ]; then
     wait $pid 2> /dev/null
 fi
 
-output=$(curl --user-agent "$fake_browser" -X POST --header "Content-type: audio/x-flac; rate=16000;" --data-binary "@$file" "https://www.google.com/speech-api/v1/recognize?client=chromium&lang=$lang")
+output=$(curl --user-agent "$fake_ua" -X POST --header "Content-type: audio/x-flac; rate=16000;" --data-binary "@$file" "https://www.google.com/speech-api/v1/recognize?client=chromium&lang=$lang")
 
 #echo "$output"
 confidence=$(echo "$output" | sed 's/.*confidence":0.\(..\).*/\1/')
