@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fake_browser="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.77 Safari/535.7"
+fake_browser="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1944.0 Safari/537.36"
 
 # http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 lang_in="auto"
